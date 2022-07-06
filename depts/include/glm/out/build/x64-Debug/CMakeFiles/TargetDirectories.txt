@@ -1,0 +1,3 @@
+D:/Estudios_Universidad/Fundamento/fundamentos2022-01-master/fundamentos2022-01-master/depts/include/glm/out/build/x64-Debug/CMakeFiles/glm_dummy.dir
+D:/Estudios_Universidad/Fundamento/fundamentos2022-01-master/fundamentos2022-01-master/depts/include/glm/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/Estudios_Universidad/Fundamento/fundamentos2022-01-master/fundamentos2022-01-master/depts/include/glm/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
