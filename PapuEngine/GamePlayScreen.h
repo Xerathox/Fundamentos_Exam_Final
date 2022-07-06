@@ -1,5 +1,4 @@
 #pragma once
-
 #include <SDL\SDL.h>
 #include "Camera2D.h"
 #include "IGameScreen.h"
@@ -20,6 +19,7 @@
 #include <SDL\SDL_mixer.h>
 #include "SpriteFont.h"
 #include "Button.h"
+#include <time.h>
 
 class GamePlayScreen : public IGameScreen
 {
@@ -41,6 +41,7 @@ private:
 	SpriteFont* spriteFont;
 	Background* _background;
 	Button* _btnReplay;
+	time_t start;
 
 	bool _gamePlay;
 	bool _gameRetry;

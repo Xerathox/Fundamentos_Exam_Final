@@ -68,14 +68,20 @@ void MenuScreen::draw()
 	background->draw(_spriteBatch);
 	button->draw(_spriteBatch);
 	
+	//Título
 	char buffer[256];
-	sprintf_s(buffer, "GOKU VISITANDO LATAM");
+	sprintf_s(buffer, "Examen Final Bica Corazon");
 	Color color;
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
 	color.a = 255;
-	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-200, 50), glm::vec2(1), 0.0f, color);
+	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-275, 50), glm::vec2(1), 0.0f, color);
+
+	//Alumno
+	sprintf_s(buffer, "Hecho por: Joaquin Aguirre Peralta ");	
+	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-350, 0), glm::vec2(1), 0.0f, color);
+
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 

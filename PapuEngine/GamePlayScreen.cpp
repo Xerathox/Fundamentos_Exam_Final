@@ -1,6 +1,5 @@
 #include "GamePlayScreen.h"
 #include "Game.h"
-
 #include "ImageLoader.h"
 #include <iostream>
 #include "ResourceManager.h"
@@ -37,7 +36,10 @@ void GamePlayScreen::build() {
 	_levels.push_back(new Level("Levels/level3.txt"));
 	_levels.push_back(new Level("Levels/level4.txt"));
 
-	_music.SDL2SoundEffect(_currenLevel+1);
+	//contador 
+	start = time(0);
+
+	//_music.SDL2SoundEffect(_currenLevel+1);
 
 	_player = new Player();
 	_weapon = new Weapon();
@@ -147,35 +149,29 @@ void GamePlayScreen::draw() {
 		_zombies[i]->draw(_spriteBatch, "Textures/zombie.png");
 	}
 	//background->draw(_spriteBatch);
-	
-	//contador de zombies
+
+	int seconds_since_start = difftime(time(0), start);
+
+	//contador de tiempo
 	char buffer[256];
-	sprintf_s(buffer, "Zombies: %d", _zombies.size());
+	cout << "tiempo " << seconds_since_start << endl;
+	sprintf_s(buffer, "Tiempo: %d", seconds_since_start);
 	Color color;
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
 	color.a = 255;
-	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x-875, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
+	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 875, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
-	//contador de humanos
+	//contador de Puntaje 
 	//char buffer[256];
-	sprintf_s(buffer, "Humanos: %d", _humans.size());
+	sprintf_s(buffer, "Puntaje: %d", 0);
 	//Color color;
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
 	color.a = 255;
-	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 875, _player->getPosition().y + 400), glm::vec2(2), 0.0f, color);
-
-	//contador de nivel
-	sprintf_s(buffer, "Nivel Actual: %d", _currenLevel + 1);
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
-	color.a = 255;
-	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 875, _player->getPosition().y + 300), glm::vec2(2), 0.0f, color);
-
+	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x + 500, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
 	//VICTORIA
 	if (_currenLevel == 3 && _zombies.size() <= 0) {
