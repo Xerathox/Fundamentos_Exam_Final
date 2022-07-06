@@ -36,6 +36,7 @@ private:
 	Background* _background;
 	Button* _btnReplay;
 	time_t start;
+	int puntaje = 0;
 
 	bool _gamePlay;
 	bool _gameRetry;
@@ -54,6 +55,7 @@ public:
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
 	void checkInput();
+	void updatePuntaje(int tecla, int tipo);
 
 };
 

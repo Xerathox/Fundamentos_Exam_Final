@@ -48,25 +48,15 @@ void GamePlayScreen::build() {
 	cout << "Pos y" << _levels[_currenLevel]->getHeight() << endl;
 
 	//TODO creacion de humanos
-	/*for (int i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
+	for (int i = 0; i < 50; i++)
 	{
-		_humans.push_back(new Human());
-		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH,
-			randPosY(randomEngine) * TILE_WIDTH);
-		_humans.back()->init(1.0f, pos);
-	}*/
-
-	//creacion de zombies
-	const std::vector<glm::vec2>& zombiePosition =
-		_levels[_currenLevel]->getZombiesPosition();
-
-	for (size_t i = 0; i < zombiePosition.size(); i++)
-	{		
 		_zombies.push_back(new Zombie());
-		_zombies.back()->init(1.3f, zombiePosition[i], (rand() % 3) + 1);
+		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH,
+			randPosY(randomEngine) * TILE_WIDTH);		
+		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
 	}
-	
 }
+
 void GamePlayScreen::destroy() {
 
 }
@@ -150,13 +140,13 @@ void GamePlayScreen::draw() {
 
 	//contador de Puntaje 
 	//char buffer[256];
-	sprintf_s(buffer, "Puntaje: %d", 0);
+	sprintf_s(buffer, "Puntaje: %d", puntaje);
 	//Color color;
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
 	color.a = 255;
-	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x + 500, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
+	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x + 400, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
 	//VICTORIA
 	if (_currenLevel == 3 && _zombies.size() <= 0) {
@@ -233,19 +223,21 @@ void GamePlayScreen::updateAgents() {
 		{
 			if (_inputManager.isKeyDown(SDLK_q))
 			{
-
+				updatePuntaje(1,_zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
 			}
 			else if (_inputManager.isKeyDown(SDLK_w))
 			{
+				updatePuntaje(2, _zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
 			}
 			else if (_inputManager.isKeyDown(SDLK_e))
 			{
+				updatePuntaje(3, _zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
@@ -306,4 +298,69 @@ int GamePlayScreen::getNextScreen() const {
 };
 int GamePlayScreen::getPreviousScreen() const {
 	return -1;
+}
+
+void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
+	switch (tecla)
+	{
+	case 1:
+		switch (tipo)
+		{
+		case 1:
+			cout << "Tecla q y zombie amarillo" << endl;
+			puntaje += 10;
+			break;
+		case 2:
+			cout << "Tecla q y zombie rojo" << endl;
+			puntaje -= 10;
+			break;
+		case 3:
+			cout << "Tecla q y zombie verde" << endl;
+			puntaje -= 20;
+			break;
+		default:
+			break;
+		}
+		break;
+	case 2:
+		switch (tipo)
+		{
+		case 1:
+			cout << "Tecla w y zombie amarillo" << endl;
+			puntaje += 15;
+			break;
+		case 2:
+			cout << "Tecla w y zombie rojo" << endl;
+			puntaje += 20;
+			break;
+		case 3:
+			cout << "Tecla w y zombie verde" << endl;
+			puntaje -= 15;
+			break;
+		default:
+			break;
+		}
+		break;
+	case 3:
+		switch (tipo)
+		{
+		case 1:
+			cout << "Tecla e y zombie amarillo" << endl;
+			puntaje /= 2;
+			break;
+		case 2:
+			cout << "Tecla e y zombie rojo" << endl;
+			puntaje -= 5;
+			break;
+		case 3:
+			cout << "Tecla e y zombie verde" << endl;
+			puntaje *= 2;
+			break;
+		default:
+			break;
+		}
+		break;
+	default:
+		break;
+	}
 }
