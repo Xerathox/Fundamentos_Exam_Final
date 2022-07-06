@@ -18,8 +18,7 @@ private:
 	GLS_Program _program;
 	Window* _window = nullptr;
 	SpriteBacth _spriteBatch;
-	Background* background;
-	Button* button;
+	Background* background;	
 	InputManager inputManager;
 	Camera2D _camera;
 	void checkInput();

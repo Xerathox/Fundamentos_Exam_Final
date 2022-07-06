@@ -5,14 +5,12 @@
 
 Game::Game()
 {
-	_screenList = 
-			std::make_unique<ScreenList>(this);
+	_screenList = std::make_unique<ScreenList>(this);
 }
 
 bool Game::init() {
 	Papu::init();
-	SDL_GL_SetAttribute(
-			SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	initSystems();
 	onInit();
 	addScreens();
@@ -22,11 +20,8 @@ bool Game::init() {
 	return true;
 }
 void Game::draw() {
-	glViewport(0, 0, _window.getScreenWidth(),
-					_window.getScreenHeight());
-	if (_currentScreen 
-			&& _currentScreen->getState()
-				== ScreenState::RUNNING) {
+	glViewport(0, 0, _window.getScreenWidth(), _window.getScreenHeight());
+	if (_currentScreen && _currentScreen->getState()== ScreenState::RUNNING) {
 		_currentScreen->draw();
 	}
 }
@@ -38,6 +33,7 @@ bool Game::initSystems() {
 void Game::onSDLEvent(SDL_Event& event) {
 
 }
+
 void Game::run() {
 	if (!init()) return;
 	_isRunning = true;

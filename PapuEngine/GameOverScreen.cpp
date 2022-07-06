@@ -1,6 +1,6 @@
 #include "GameOverScreen.h"
 #include "ScreenIndices.h"
-#include <iostream>|	|
+#include <iostream>	
 
 GameOverScreen::GameOverScreen(Window* window) :_window(window)
 {
@@ -14,14 +14,11 @@ GameOverScreen::~GameOverScreen()
 
 void GameOverScreen::build()
 {
-	background = new Background("Textures/Fondos/background.png");
-	button = new Button(-100, -150, 200, 100, "Textures/btn_play.png");
-	//button = new Button("Textures/btn_play.png");	
+	background = new Background("Textures/Fondos/gam-over.png");	
 }
 
 void GameOverScreen::destroy()
-{
-	button = nullptr;
+{	
 	background = nullptr;
 }
 
@@ -65,8 +62,7 @@ void GameOverScreen::draw()
 	_spriteBatch.begin();
 
 	background->draw(_spriteBatch, glm::vec4(-400, -250, 800, 500));
-	button->draw(_spriteBatch);
-
+		
 	//Título
 	char buffer[256];
 	sprintf_s(buffer, "Game Over");
@@ -114,10 +110,7 @@ void GameOverScreen::checkInput()
 
 		if (inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 			//presione click;
-			glm::vec2 mouseCoords = _camera.convertScreenToWorl(inputManager.getMouseCoords());
-			if (button->click(mouseCoords)) {
-				cout << "Para el otro anio sera" << endl; 
-			}
+			cout << "Para el otro anio sera" << endl;
 		}
 	}
 }
