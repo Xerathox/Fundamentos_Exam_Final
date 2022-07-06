@@ -29,14 +29,13 @@ private:
 	InputManager _inputManager;
 	vector<Level*> _levels;
 	vector<Zombie*> _zombies;
-	//Background* background;
 	Player* _player;
 	int _currenLevel;	
 	SpriteFont* spriteFont;
 	Background* _background;
 	Button* _btnReplay;
 	time_t start;
-	int puntaje = 0;
+	int puntaje = 100;
 
 	bool _gamePlay;
 	bool _gameRetry;

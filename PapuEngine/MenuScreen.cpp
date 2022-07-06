@@ -65,7 +65,7 @@ void MenuScreen::draw()
 
 	_spriteBatch.begin();
 
-	background->draw(_spriteBatch);
+	background->draw(_spriteBatch, glm::vec4(-400, -250, 800, 500));
 	button->draw(_spriteBatch);
 	
 	//Título

@@ -76,7 +76,7 @@ void GamePlayScreen::onEntry() {
 	_program.addAtribute("vertexUV");
 	_program.linkShader();
 	spriteFont = new SpriteFont("Fonts/1_Minecraft-Regular.otf", 40);
-
+	_background = new Background("Textures/Fondos/game.png");
 	_camera.init(_window->getScreenWidth(),
 		_window->getScreenHeight());
 }
@@ -88,7 +88,6 @@ void GamePlayScreen::draw() {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _texture.id);
 
-	
 	/*GLuint timeLocation =
 		_program.getUniformLocation("time");
 
@@ -103,6 +102,12 @@ void GamePlayScreen::draw() {
 	glUniform1i(imageLocation, 0);
 
 	_spriteBatch.begin();
+
+	_background->draw(_spriteBatch, glm::vec4(0, 0, _levels[_currenLevel]->getWidth() * 64.0f, _levels[_currenLevel]->getHeight() * 65.0f));
+	_spriteBatch.end();
+	_spriteBatch.renderBatch();
+	_spriteBatch.begin();
+
 	_player->draw(_spriteBatch, _player->spriteActual);
 	_levels[_currenLevel]->draw();
 
@@ -132,9 +137,9 @@ void GamePlayScreen::draw() {
 	char buffer[256];
 	sprintf_s(buffer, "Tiempo: %d", seconds_since_start);
 	Color color;
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
 	color.a = 255;
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 875, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
@@ -142,9 +147,9 @@ void GamePlayScreen::draw() {
 	//char buffer[256];
 	sprintf_s(buffer, "Puntaje: %d", puntaje);
 	//Color color;
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
 	color.a = 255;
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x + 400, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
@@ -178,11 +183,11 @@ void GamePlayScreen::draw() {
 
 	}*/
 	 
+	//boton para resetear juego
 	if (!_gamePlay) {
 		_btnReplay->draw(_spriteBatch, glm::vec2(_player->getPosition().x-50, _player->getPosition().y + 100));
 		//spriteFont->draw(_btnReplay->draw(_spriteBatch), glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
 	}
-
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
@@ -190,6 +195,7 @@ void GamePlayScreen::draw() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_program.unuse();
 	_window->swapBuffer();
+
 }
 void GamePlayScreen::update() {
 	checkInput();

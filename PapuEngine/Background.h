@@ -13,6 +13,6 @@ public:
 
 	Background(std::string _path);
 	~Background();
-	void draw(SpriteBacth& spriteBatch);
+	void draw(SpriteBacth& spriteBatch,glm::vec4 rec);
 };
 
