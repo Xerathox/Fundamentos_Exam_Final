@@ -1,9 +1,7 @@
 #include "Zombie.h"
 #include "Human.h"
 
-
-Zombie::Zombie()
-{
+Zombie::Zombie(){
 }
 
 void Zombie::init(float speed, glm::vec2 position) {
@@ -15,10 +13,8 @@ void Zombie::init(float speed, glm::vec2 position) {
 void Zombie::update(const std::vector<std::string>& levelData,
 	std::vector<Human*>& humans,
 	std::vector<Zombie*>& zombies,
-	glm::vec2 player_position,
-	bool _gameplay//quitar esto, que ya no lo reciba, hasta el Agent
-	
-) {
+	glm::vec2 player_position)
+{
 	collideWithLevel(levelData);
 	Human* closeHuman = getNearestHuman(humans);
 	if (closeHuman != nullptr) {
@@ -27,13 +23,6 @@ void Zombie::update(const std::vector<std::string>& levelData,
 		);
 		_position += direction * _speed;
 	}
-	//else
-	//{
-	//	glm::vec2 direction = glm::normalize(
-	//		player_position - _position
-	//	);
-	//	_position += direction * _speed;
-	//}
 }
 
 Human* Zombie::getNearestHuman(std::vector<Human*>& humans)
@@ -52,7 +41,7 @@ Human* Zombie::getNearestHuman(std::vector<Human*>& humans)
 	return closesHuman;
 }
 
-bool Zombie::collideWithWeapon(int pos_x, int pos_y, int height, int width) {
+bool Zombie::collideWithPlayer(int pos_x, int pos_y, int height, int width) {
 
 	return rectRect(_position.x, _position.y, AGENT_WIDTH, AGENT_WIDTH, pos_x, pos_y, height, width);
 }

@@ -11,8 +11,6 @@
 #include "Player.h"
 #include "Human.h"
 #include "Background.h"
-#include "Music.h"
-#include "Weapon.h"
 #include "InputManager.h"
 #include <vector>
 #include <GL\glew.h>
@@ -35,9 +33,7 @@ private:
 	vector<Zombie*> _zombies;
 	//Background* background;
 	Player* _player;
-	Weapon* _weapon;
 	int _currenLevel;	
-	Music _music;
 	SpriteFont* spriteFont;
 	Background* _background;
 	Button* _btnReplay;
@@ -60,6 +56,6 @@ public:
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
 	void checkInput();
-	void manageMusic();
+
 };
 

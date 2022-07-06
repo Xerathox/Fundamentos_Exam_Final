@@ -12,11 +12,6 @@ using namespace std;
 
 GamePlayScreen::GamePlayScreen(Window* window) :
 	_window(window){
-	_music.addSoundEffect("Music/Kamehameha.wav");
-	_music.addSoundEffect("Music/Hell_on_Earth.wav");
-	_music.addSoundEffect("Music/BFG Division.wav");	
-	_music.addSoundEffect("Music/Rip_&_Tear.wav");
-	_music.addSoundEffect("Music/TOTTFIY.wav");
 	_btnReplay = new Button(-100000, -100000, 170, 80, "Textures/btn_retry.png");
 	//_background = new Background("Textures/Fondos/background.png");
 	_screenIndex = SCREEN_INDEX_GAMEPLAY;
@@ -38,13 +33,10 @@ void GamePlayScreen::build() {
 
 	//contador 
 	start = time(0);
-
-	//_music.SDL2SoundEffect(_currenLevel+1);
-
+	//jugador
 	_player = new Player();
-	_weapon = new Weapon();
 	//_currenLevel = 0;
-	_player->init(3.5f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager, &_camera, _weapon);	
+	_player->init(3.5f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager, &_camera);	
 	//_humans.push_back(_player);
 	_spriteBatch.init();
 
@@ -130,15 +122,6 @@ void GamePlayScreen::draw() {
 	_player->draw(_spriteBatch, _player->spriteActual);
 	_levels[_currenLevel]->draw();
 
-
-	if (_player->drawWeapon)
-	{
-		_weapon->draw(_spriteBatch, _player->getPosition().x, _player->getPosition().y);
-	}
-	else
-	{
-		_weapon->reset();
-	}
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
 		_humans[i]->draw(_spriteBatch, "Textures/human.png");
@@ -230,36 +213,23 @@ void GamePlayScreen::update() {
 		onExit();
 		build();		
 	}
-	manageMusic();
-	
-}
 
-void GamePlayScreen::manageMusic()
-{
-	if (_player->drawWeapon)
-	{
-		if (!_player->soundWeapon)
-		{
-			cout << "Playing weapon sound." << endl;
-			_music.SDL2SoundEffect(0);
-			_player->soundWeapon = true;
-		}
-	}
+	
 }
 
 void GamePlayScreen::updateAgents() {
 
-	_player->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2(),_gamePlay);
+	_player->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
-		_humans[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2(),_gamePlay);
+		_humans[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
 	}
 
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
-		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, _player->getPosition(),_gamePlay);
+		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, _player->getPosition());
 
-		if (_zombies[i]->collideWithWeapon(_weapon->pos_x, _weapon->pos_y, _weapon->height, _weapon->width))
+		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH))
 		{
 			delete _zombies[i];
 			_zombies[i] = _zombies.back();
