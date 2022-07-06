@@ -218,23 +218,24 @@ void GamePlayScreen::update() {
 }
 
 void GamePlayScreen::updateAgents() {
-
+	//movimimento humanos
 	_player->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
 		_humans[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
 	}
-
+	//movimientos zombies
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
 		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, _player->getPosition());
 
+		//destruccion de zombies cuando interactuan con humanos
 		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH))
 		{
 			delete _zombies[i];
 			_zombies[i] = _zombies.back();
 			_zombies.pop_back();
-		}
+		}		
 		else
 		{
 			for (size_t j = 0; j < _humans.size(); j++)
@@ -248,6 +249,7 @@ void GamePlayScreen::updateAgents() {
 				}
 			}
 		}
+		
 	}
 }
 

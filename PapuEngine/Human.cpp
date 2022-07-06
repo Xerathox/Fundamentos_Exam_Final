@@ -21,11 +21,7 @@ void Human::init(float speed, glm::vec2 position) {
 	_direction = glm::vec2(_direction);
 }
 
-void Human::update(const std::vector<std::string>& levelData,
-	std::vector<Human*>& humans,
-	std::vector<Zombie*>& zombies,
-	glm::vec2 player_position)
-	{
+void Human::update(const std::vector<std::string>& levelData, std::vector<Human*>& humans, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
 	_position += _direction * _speed;
 	if (collideWithLevel(levelData)) {
 		static std::mt19937 randomEngine(time(nullptr));
