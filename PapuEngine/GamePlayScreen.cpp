@@ -231,10 +231,27 @@ void GamePlayScreen::updateAgents() {
 		//destruccion de zombies cuando interactuan con humanos
 		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH))
 		{
-			delete _zombies[i];
-			_zombies[i] = _zombies.back();
-			_zombies.pop_back();
-		}			
+			if (_inputManager.isKeyDown(SDLK_q))
+			{
+
+				delete _zombies[i];
+				_zombies[i] = _zombies.back();
+				_zombies.pop_back();
+			}
+			else if (_inputManager.isKeyDown(SDLK_w))
+			{
+				delete _zombies[i];
+				_zombies[i] = _zombies.back();
+				_zombies.pop_back();
+			}
+			else if (_inputManager.isKeyDown(SDLK_e))
+			{
+				delete _zombies[i];
+				_zombies[i] = _zombies.back();
+				_zombies.pop_back();
+			}
+
+		}
 	}
 }
 
@@ -265,10 +282,10 @@ void GamePlayScreen::checkInput() {
 			_inputManager.releaseKey(event.button.button);
 			break;
 		}
-		if (_inputManager.isKeyDown(SDLK_q)) {
+		if (_inputManager.isKeyDown(SDLK_z)) {
 			_camera.setScale(_camera.getScale() + SCALE_SPEED);
 		}
-		if (_inputManager.isKeyDown(SDLK_e)) {
+		if (_inputManager.isKeyDown(SDLK_x)) {
 			_camera.setScale(_camera.getScale() - SCALE_SPEED);
 		}
 		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {

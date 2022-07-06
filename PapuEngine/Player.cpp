@@ -20,16 +20,16 @@ void Player::update(const std::vector<std::string>& levelData, std::vector<Zombi
 	collideWithZombies(zombies);
 
 	//movimiento
-	if (_inputManager->isKeyDown(SDLK_w)) {
+	if (_inputManager->isKeyDown(SDLK_UP)) {
 		_position.y += _speed;
 	}
-	if (_inputManager->isKeyDown(SDLK_s)) {
+	if (_inputManager->isKeyDown(SDLK_DOWN)) {
 		_position.y -= _speed;
 	}
-	if (_inputManager->isKeyDown(SDLK_a)) {	
+	if (_inputManager->isKeyDown(SDLK_LEFT)) {	
 		_position.x -= _speed;
 	}
-	if (_inputManager->isKeyDown(SDLK_d)) {
+	if (_inputManager->isKeyDown(SDLK_RIGHT)) {
 		_position.x += _speed;
 	}
 	collideWithLevel(levelData);
@@ -39,8 +39,7 @@ void Player::collideWithZombies(std::vector<Zombie*>& zombies) {
 	for each (Zombie * zombie in zombies)
 	{
 		if (collideWithAgent(zombie))
-		{
-			cout << "Se esta chocando con zombies" << endl;			
+		{	
 			break;
 		}
 	}
