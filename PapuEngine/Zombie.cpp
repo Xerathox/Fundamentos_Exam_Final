@@ -6,7 +6,8 @@
 Zombie::Zombie(){
 }
 
-void Zombie::init(float speed, glm::vec2 position) {
+void Zombie::init(float speed, glm::vec2 position, int tipo) {
+	_tipo_de_zombie = tipo;
 	_speed = speed;
 	color.set(255, 255, 255, 255);
 	_position = position;

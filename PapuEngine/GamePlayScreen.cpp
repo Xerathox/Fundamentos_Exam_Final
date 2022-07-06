@@ -61,9 +61,9 @@ void GamePlayScreen::build() {
 		_levels[_currenLevel]->getZombiesPosition();
 
 	for (size_t i = 0; i < zombiePosition.size(); i++)
-	{
+	{		
 		_zombies.push_back(new Zombie());
-		_zombies.back()->init(1.3f, zombiePosition[i]);
+		_zombies.back()->init(1.3f, zombiePosition[i], (rand() % 3) + 1);
 	}
 	
 }
@@ -118,7 +118,21 @@ void GamePlayScreen::draw() {
 
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
-		_zombies[i]->draw(_spriteBatch, "Textures/zombie.png");
+		switch (_zombies[i]->_tipo_de_zombie) 
+		{
+		case 1:
+			_zombies[i]->draw(_spriteBatch, "Textures/amarillo.png");
+			break;
+		case 2:
+			_zombies[i]->draw(_spriteBatch, "Textures/rojo.png");
+			break;
+		case 3:
+			_zombies[i]->draw(_spriteBatch, "Textures/verde.png");
+			break;
+		default:
+			break;
+		}
+
 	}
 	//background->draw(_spriteBatch);
 
