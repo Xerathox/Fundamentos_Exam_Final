@@ -19,10 +19,6 @@ private:
 
 public:
 	std::string spriteActual;
-	std::string spriteDer;
-	std::string spriteIzq;
-	std::string spriteArr;
-	std::string spriteAba;
 	Weapon* _weapon;
 	bool drawWeapon;
 	bool soundWeapon;
