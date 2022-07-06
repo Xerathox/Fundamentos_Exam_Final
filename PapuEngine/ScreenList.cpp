@@ -1,6 +1,8 @@
 #include "ScreenList.h"
 #include "IGameScreen.h"
+#include <iostream>
 
+using namespace std;
 
 ScreenList::ScreenList(Game* game):_game(game)
 {
@@ -39,6 +41,7 @@ IGameScreen* ScreenList::getCurrent() {
 
 IGameScreen* ScreenList::moveNext() {
 	IGameScreen* currentScreen = getCurrent();
+	//cout << "screenIndex " << currentScreen->getNextScreen() << endl;
 	if (currentScreen->getNextScreen() != -1) {
 		_currentIndex = 
 			currentScreen->getNextScreen();

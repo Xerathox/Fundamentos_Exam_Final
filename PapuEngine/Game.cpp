@@ -63,10 +63,9 @@ void Game::update() {
 			case ScreenState::RUNNING:
 				_currentScreen->update();
 				break;
-			case ScreenState::CHANGE_NEXT:
+			case ScreenState::CHANGE_NEXT:				
 				_currentScreen->onExit();
-				_currentScreen = 
-							_screenList->moveNext();
+				_currentScreen = _screenList->moveNext();
 				if (_currentScreen) {
 					_currentScreen->setRunning();
 					_currentScreen->onEntry();

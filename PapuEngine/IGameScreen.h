@@ -4,7 +4,8 @@ enum class ScreenState {
 	RUNNING,
 	EXIT_APPLICATION,
 	CHANGE_NEXT,
-	CHANGE_PREVIOUS
+	CHANGE_PREVIOUS,
+	CHANGE_LOST
 };
 class Game;
 class IGameScreen

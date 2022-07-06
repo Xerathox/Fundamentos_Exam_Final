@@ -56,7 +56,6 @@ void GamePlayScreen::build() {
 		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
 	}
 }
-
 void GamePlayScreen::destroy() {
 
 }
@@ -205,6 +204,11 @@ void GamePlayScreen::update() {
 	_inputManager.update();
 	_camera.setPosition(_player->getPosition());
 
+	//logica de GAME OVER
+	if (puntaje <= 0) {		
+		_currentState = ScreenState::CHANGE_NEXT;
+	}
+
 	//logica de niveles
 	if (_zombies.size() <= 0 && _currenLevel+1 < 4) {
 		_currenLevel++;
@@ -300,10 +304,10 @@ void GamePlayScreen::checkInput() {
 	}
 }
 int GamePlayScreen::getNextScreen() const {
-	return -1;
+	return SCREEN_INDEX_LOST;
 };
 int GamePlayScreen::getPreviousScreen() const {
-	return -1;
+	return SCREEN_INDEX_NO_INDEX;
 }
 
 void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
@@ -369,4 +373,6 @@ void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
 	default:
 		break;
 	}
+
+
 }
