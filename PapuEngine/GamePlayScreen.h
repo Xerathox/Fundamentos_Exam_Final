@@ -9,7 +9,6 @@
 #include "Level.h"
 #include "Zombie.h"
 #include "Player.h"
-#include "Human.h"
 #include "Background.h"
 #include "InputManager.h"
 #include <vector>
@@ -29,7 +28,6 @@ private:
 	GLTexture _texture;
 	InputManager _inputManager;
 	vector<Level*> _levels;
-	vector<Human*>  _humans;
 	vector<Zombie*> _zombies;
 	//Background* background;
 	Player* _player;

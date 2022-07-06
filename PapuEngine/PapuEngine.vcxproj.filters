@@ -78,9 +78,6 @@
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Human.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Agent.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Human.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">

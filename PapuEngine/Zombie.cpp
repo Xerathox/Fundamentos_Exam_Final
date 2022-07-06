@@ -1,5 +1,4 @@
 #include "Zombie.h"
-#include "Human.h"
 #include <random>
 #include <ctime>
 #include <glm\gtx\rotate_vector.hpp>
@@ -21,39 +20,13 @@ void Zombie::init(float speed, glm::vec2 position) {
 	_direction = glm::vec2(_direction);
 }
 
-void Zombie::update(const std::vector<std::string>& levelData, std::vector<Human*>& humans, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
+void Zombie::update(const std::vector<std::string>& levelData, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
 	_position += _direction * _speed;
 	if (collideWithLevel(levelData)) {
 		static std::mt19937 randomEngine(time(nullptr));
 		static std::uniform_real_distribution<float>randRotate(-40.0f, 40.0f);
 		_direction = glm::rotate(_direction, randRotate(randomEngine));
 	}
-	/*
-	collideWithLevel(levelData);
-	Human* closeHuman = getNearestHuman(humans);
-	if (closeHuman != nullptr) {
-		glm::vec2 direction = glm::normalize(
-			closeHuman->getPosition() - _position
-		);
-		_position += direction * _speed;
-	}
-	*/
-}
-
-Human* Zombie::getNearestHuman(std::vector<Human*>& humans)
-{
-	Human* closesHuman = nullptr;
-	float smallDistance = 8888888888.0f;
-	for (size_t i = 0; i < humans.size(); i++)
-	{
-		glm::vec2 dist = humans[i]->getPosition() - _position;
-		float distance = glm::length(dist);
-		if (distance < smallDistance) {
-			smallDistance = distance;
-			closesHuman = humans[i];
-		}
-	}
-	return closesHuman;
 }
 
 bool Zombie::collideWithPlayer(int pos_x, int pos_y, int height, int width) {

@@ -4,9 +4,7 @@
 #include "GLTexture.h"
 #include <string>
 
-class Human;
 class Zombie;
-
 
 const float AGENT_WIDTH = 60.0f;
 const float AGENT_RADIUS = AGENT_WIDTH / 2.0f;
@@ -24,8 +22,7 @@ protected:
 public:
 	Agent();
 	glm::vec2 getPosition()const { return _position; };
-	virtual void update(const std::vector<std::string>& levelData,
-		std::vector<Human*>& humans,
+	virtual void update(const std::vector<std::string>& levelData,		
 		std::vector<Zombie*>& zombies,
 		glm::vec2 player_position) = 0;
 	void draw(SpriteBacth& spritebatch, std::string name_texture);

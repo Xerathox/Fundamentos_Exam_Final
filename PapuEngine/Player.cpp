@@ -15,7 +15,7 @@ void Player::init(float speed, glm::vec2 position, InputManager* inputManager, C
 	spriteActual = "Textures/player_alien.png";
 
 }
-void Player::update(const std::vector<std::string>& levelData, std::vector<Human*>& humans, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
+void Player::update(const std::vector<std::string>& levelData, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
 
 	collideWithZombies(zombies);
 

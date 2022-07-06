@@ -126,7 +126,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamePlayScreen.cpp" />
     <ClCompile Include="GLS_Program.cpp" />
-    <ClCompile Include="Human.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
@@ -157,7 +156,6 @@
     <ClInclude Include="GamePlayScreen.h" />
     <ClInclude Include="GLS_Program.h" />
     <ClInclude Include="GLTexture.h" />
-    <ClInclude Include="Human.h" />
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />

@@ -47,14 +47,14 @@ void GamePlayScreen::build() {
 	cout << "Pos x" << _levels[_currenLevel]->getWidth() << endl;
 	cout << "Pos y" << _levels[_currenLevel]->getHeight() << endl;
 
-	//creacion de humanos
-	for (int i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
+	//TODO creacion de humanos
+	/*for (int i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
 	{
 		_humans.push_back(new Human());
 		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH,
 			randPosY(randomEngine) * TILE_WIDTH);
 		_humans.back()->init(1.0f, pos);
-	}
+	}*/
 
 	//creacion de zombies
 	const std::vector<glm::vec2>& zombiePosition =
@@ -76,12 +76,6 @@ void GamePlayScreen::onExit() {
 		delete _zombies[i];
 		_zombies[i] = _zombies.back();
 		_zombies.pop_back();
-	}
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		delete _humans[i];
-		_humans[i] = _humans.back();
-		_humans.pop_back();
 	}
 }
 
@@ -122,11 +116,6 @@ void GamePlayScreen::draw() {
 	_player->draw(_spriteBatch, _player->spriteActual);
 	_levels[_currenLevel]->draw();
 
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		_humans[i]->draw(_spriteBatch, "Textures/human.png");
-	}
-
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
 		_zombies[i]->draw(_spriteBatch, "Textures/zombie.png");
@@ -137,7 +126,6 @@ void GamePlayScreen::draw() {
 
 	//contador de tiempo
 	char buffer[256];
-	cout << "tiempo " << seconds_since_start << endl;
 	sprintf_s(buffer, "Tiempo: %d", seconds_since_start);
 	Color color;
 	color.r = 0;
@@ -172,8 +160,8 @@ void GamePlayScreen::draw() {
 			//spriteFont->draw(_btnReplay->draw(_spriteBatch), glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
 		}
 	}
-	//DERROTA
-	if (_humans.size() <= 0) {
+	//TODO DERROTA
+	/*if (_humans.size() <= 0) {
 		char buffer[256];
 		sprintf_s(buffer, "Perdiste");
 		Color color;
@@ -184,8 +172,8 @@ void GamePlayScreen::draw() {
 		spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
 		_gamePlay = false;
 
-	}
-	// 
+	}*/
+	 
 	if (!_gamePlay) {
 		_btnReplay->draw(_spriteBatch, glm::vec2(_player->getPosition().x-50, _player->getPosition().y + 100));
 		//spriteFont->draw(_btnReplay->draw(_spriteBatch), glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
@@ -219,15 +207,12 @@ void GamePlayScreen::update() {
 
 void GamePlayScreen::updateAgents() {
 	//movimimento humanos
-	_player->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		_humans[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, glm::vec2());
-	}
+	_player->update(_levels[_currenLevel]->getLevelData(), _zombies, glm::vec2());
+
 	//movimientos zombies
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
-		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _humans, _zombies, _player->getPosition());
+		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _zombies, _player->getPosition());
 
 		//destruccion de zombies cuando interactuan con humanos
 		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH))
@@ -235,21 +220,7 @@ void GamePlayScreen::updateAgents() {
 			delete _zombies[i];
 			_zombies[i] = _zombies.back();
 			_zombies.pop_back();
-		}		
-		else
-		{
-			for (size_t j = 0; j < _humans.size(); j++)
-			{
-				if (_zombies[i]->collideWithAgent(_humans[j])) {
-					_zombies.push_back(new Zombie());
-					_zombies.back()->init(1.3f, _humans[j]->getPosition());
-					delete _humans[j];
-					_humans[j] = _humans.back();
-					_humans.pop_back();
-				}
-			}
-		}
-		
+		}			
 	}
 }
 
