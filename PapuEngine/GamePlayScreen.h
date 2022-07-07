@@ -35,6 +35,7 @@ private:
 	Background* _background;
 	Button* _btnReplay;
 	time_t start;	
+	int count = 0;
 
 	bool _gamePlay;
 	bool _gameRetry;

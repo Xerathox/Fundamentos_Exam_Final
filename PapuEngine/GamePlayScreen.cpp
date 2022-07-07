@@ -48,11 +48,10 @@ void GamePlayScreen::build() {
 	cout << "Pos y" << _levels[_currenLevel]->getHeight() << endl;
 
 	//TODO creacion de humanos
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		_zombies.push_back(new Zombie());
-		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH,
-			randPosY(randomEngine) * TILE_WIDTH);		
+		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);		
 		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
 	}
 }
@@ -86,11 +85,6 @@ void GamePlayScreen::draw() {
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _texture.id);
-
-	/*GLuint timeLocation =
-		_program.getUniformLocation("time");
-
-	glUniform1f(timeLocation,_time);*/
 
 	GLuint pLocation = _program.getUniformLocation("P");
 
@@ -203,6 +197,17 @@ void GamePlayScreen::update() {
 	updateAgents();
 	_inputManager.update();
 	_camera.setPosition(_player->getPosition());
+
+	count++;
+	if (count % 2000 == 0) {
+		std::mt19937 randomEngine(time(nullptr));
+		std::uniform_int_distribution<int>randPosX(1, _levels[_currenLevel]->getWidth() - 2);
+		std::uniform_int_distribution<int>randPosY(1, _levels[_currenLevel]->getHeight() - 2);
+
+		_zombies.push_back(new Zombie());
+		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);
+		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
+	}
 
 	//logica de GAME OVER
 	if (puntaje <= 0) {		
