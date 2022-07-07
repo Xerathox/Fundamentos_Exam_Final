@@ -61,7 +61,7 @@ void MenuScreen::draw() {
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-275, 50), glm::vec2(1), 0.0f, color);
 
 	//Alumno
-	sprintf_s(buffer, "Hecho por: Joaquin Aguirre Peralta ");	
+	sprintf_s(buffer, "Hecho por: XXX ");	
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-350, 0), glm::vec2(1), 0.0f, color);
 
 	_spriteBatch.end();

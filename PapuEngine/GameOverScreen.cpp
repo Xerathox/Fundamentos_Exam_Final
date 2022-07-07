@@ -59,6 +59,11 @@ void GameOverScreen::draw() {
 	color.a = 255;
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(-100, 50), glm::vec2(1), 0.0f, color);
 
+	//imprimir puntaje
+	char _buffer[256];
+	sprintf_s(_buffer, "Maximo Puntaje: %d", puntaje);
+	spriteFont->draw(_spriteBatch, _buffer, glm::vec2(-250, 0), glm::vec2(1), 0.0f, color);
+
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 
