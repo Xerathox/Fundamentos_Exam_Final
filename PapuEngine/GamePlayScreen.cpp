@@ -12,17 +12,14 @@ using namespace std;
 
 GamePlayScreen::GamePlayScreen(Window* window) :
 	_window(window){
-	_btnReplay = new Button(-100000, -100000, 170, 80, "Textures/btn_retry.png");
-	//_background = new Background("Textures/Fondos/background.png");
 	_screenIndex = SCREEN_INDEX_GAMEPLAY;
 	_currenLevel = 0;
 	_gamePlay = true;
 	_gameRetry = false;
 }
 
-GamePlayScreen::~GamePlayScreen()
-{
-	_btnReplay = nullptr;
+GamePlayScreen::~GamePlayScreen(){
+
 }
 
 void GamePlayScreen::build() {
@@ -120,9 +117,7 @@ void GamePlayScreen::draw() {
 		default:
 			break;
 		}
-
 	}
-	//background->draw(_spriteBatch);
 
 	int seconds_since_start = difftime(time(0), start);
 
@@ -137,50 +132,12 @@ void GamePlayScreen::draw() {
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 875, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
 
 	//contador de Puntaje 
-	//char buffer[256];
 	sprintf_s(buffer, "Puntaje: %d", puntaje);
-	//Color color;
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
 	color.a = 255;
 	spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x + 400, _player->getPosition().y + 500), glm::vec2(2), 0.0f, color);
-
-	//VICTORIA
-	if (_currenLevel == 3 && _zombies.size() <= 0) {
-		char buffer[256];
-		sprintf_s(buffer, "Ganaste");
-		Color color;
-		color.r = 0;
-		color.g = 255;
-		color.b = 0;
-		color.a = 255;
-		spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
-		_gamePlay = false;
-		if (!_gamePlay && _currenLevel == 3) {
-			_btnReplay->draw(_spriteBatch, glm::vec2(_player->getPosition().x-50, _player->getPosition().y + 100));
-			//spriteFont->draw(_btnReplay->draw(_spriteBatch), glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
-		}
-	}
-	//TODO DERROTA
-	/*if (_humans.size() <= 0) {
-		char buffer[256];
-		sprintf_s(buffer, "Perdiste");
-		Color color;
-		color.r = 255;
-		color.g = 0;
-		color.b = 0;
-		color.a = 255;
-		spriteFont->draw(_spriteBatch, buffer, glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
-		_gamePlay = false;
-
-	}*/
-	 
-	//boton para resetear juego
-	if (!_gamePlay) {
-		_btnReplay->draw(_spriteBatch, glm::vec2(_player->getPosition().x-50, _player->getPosition().y + 100));
-		//spriteFont->draw(_btnReplay->draw(_spriteBatch), glm::vec2(_player->getPosition().x - 125, _player->getPosition().y + 250), glm::vec2(2), 0.0f, color);
-	}
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
@@ -294,16 +251,6 @@ void GamePlayScreen::checkInput() {
 		}
 		if (_inputManager.isKeyDown(SDLK_x)) {
 			_camera.setScale(_camera.getScale() - SCALE_SPEED);
-		}
-		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
-			//presione click;
-			glm::vec2 mouseCoords = _camera.convertScreenToWorl(_inputManager.getMouseCoords());
-			if (_btnReplay->click(mouseCoords)) {
-				onExit();
-				_currenLevel = 0;
-				build();
-				_gamePlay = true;
-			}
 		}
 		
 	}

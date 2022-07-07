@@ -33,7 +33,6 @@ private:
 	int _currenLevel;	
 	SpriteFont* spriteFont;
 	Background* _background;
-	Button* _btnReplay;
 	time_t start;	
 	int count = 0;
 
