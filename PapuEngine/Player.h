@@ -1,18 +1,17 @@
 #pragma once
-#include "InputManager.h"
-#include "Camera2D.h"
-#include "Zombie.h"
 #include "Agent.h"
+#include "Zombie.h"
+#include "Camera2D.h"
+#include "InputManager.h"
 
 #include <vector>
 
 class Zombie;
 
-class Player: public Agent
-{
+class Player: public Agent {
 private:
-	InputManager* _inputManager;
 	Camera2D* _camera;
+	InputManager* _inputManager;
 
 public:
 	std::string spriteActual;

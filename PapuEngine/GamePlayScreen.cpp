@@ -25,23 +25,22 @@ void GamePlayScreen::build() {
 	//contador 
 	start = time(0);
 	//jugador
-	_player = new Player();
-	//_currenLevel = 0;
+	_player = new Player();	
 	_player->init(3.5f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager, &_camera);	
-	//_humans.push_back(_player);
 	_spriteBatch.init();
 
 	std::mt19937 randomEngine(time(nullptr));
 	std::uniform_int_distribution<int>randPosX(1, _levels[_currenLevel]->getWidth() - 2);
 	std::uniform_int_distribution<int>randPosY(1, _levels[_currenLevel]->getHeight() - 2);
 
-	//TODO creacion de humanos
+	//creacion de zombies aleatoria cada 2 segundos
 	for (int i = 0; i < 1; i++)	{
 		_zombies.push_back(new Zombie());
 		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);		
 		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
 	}
 }
+
 void GamePlayScreen::destroy() { }
 
 void GamePlayScreen::onExit() {
@@ -129,6 +128,7 @@ void GamePlayScreen::draw() {
 	_window->swapBuffer();
 
 }
+
 void GamePlayScreen::update() {
 	checkInput();
 	draw();
