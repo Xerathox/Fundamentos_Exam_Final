@@ -373,6 +373,4 @@ void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
 	default:
 		break;
 	}
-
-
 }

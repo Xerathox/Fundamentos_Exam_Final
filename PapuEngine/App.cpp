@@ -21,7 +21,6 @@ void App::addScreens() {
 void App::onExit() {
 }
 
-
 App::~App()
 {
 }

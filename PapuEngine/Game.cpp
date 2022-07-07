@@ -2,6 +2,7 @@
 #include "PapuEngine.h"
 #include "ScreenList.h"
 #include "IGameScreen.h"
+#include "ScreenIndices.h"
 
 Game::Game()
 {
@@ -69,8 +70,7 @@ void Game::update() {
 				break;
 			case ScreenState::CHANGE_PREVIOUS:
 				_currentScreen->onExit();
-				_currentScreen =
-					_screenList->movePrevious();
+				_currentScreen = _screenList->movePrevious();
 				if (_currentScreen) {
 					_currentScreen->setRunning();
 					_currentScreen->onEntry();
@@ -83,6 +83,12 @@ void Game::update() {
 				break;
 		}
 		
+	}
+	if (_screenList->_currentIndex == SCREEN_INDEX_GAMEPLAY) {
+		puntajeFinal = _currentScreen->puntaje;
+	}
+	else {
+		_currentScreen->puntaje = puntajeFinal;
 	}
 }
 

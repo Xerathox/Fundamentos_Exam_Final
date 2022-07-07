@@ -34,8 +34,7 @@ private:
 	SpriteFont* spriteFont;
 	Background* _background;
 	Button* _btnReplay;
-	time_t start;
-	int puntaje = 1;
+	time_t start;	
 
 	bool _gamePlay;
 	bool _gameRetry;

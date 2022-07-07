@@ -15,7 +15,7 @@ protected:
 	ScreenState _currentState = ScreenState::NONE;
 	Game* _game = nullptr;
 public:
-	
+	int puntaje = 1;
 	friend class ScreenList;
 	virtual void build() = 0;
 	virtual void destroy() = 0;
@@ -38,6 +38,5 @@ public:
 	void setParent(Game* game) {
 		_game = game;
 	}
-	
 };
 

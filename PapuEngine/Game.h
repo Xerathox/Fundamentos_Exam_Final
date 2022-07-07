@@ -18,6 +18,7 @@ public:
 	virtual void addScreens() = 0;
 	virtual void onExit() = 0;
 	void onSDLEvent(SDL_Event& event);
+	int puntajeFinal = 1;
 
 protected:
 	bool init();

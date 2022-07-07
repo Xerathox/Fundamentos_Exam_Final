@@ -37,8 +37,8 @@ void GameOverScreen::onEntry()
 	_spriteBatch.init();
 	_camera.init(_window->getScreenWidth(),
 		_window->getScreenHeight());
-	//spriteFont = new SpriteFont("Fonts/Fuente1.ttf", 40);
 	spriteFont = new SpriteFont("Fonts/1_Minecraft-Regular.otf", 40);
+
 
 }
 
