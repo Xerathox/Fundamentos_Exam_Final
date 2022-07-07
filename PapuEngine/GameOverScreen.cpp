@@ -62,7 +62,7 @@ void GameOverScreen::draw() {
 	//imprimir puntaje
 	char _buffer[256];
 	sprintf_s(_buffer, "Maximo Puntaje: %d", puntaje);
-	spriteFont->draw(_spriteBatch, _buffer, glm::vec2(-250, 0), glm::vec2(1), 0.0f, color);
+	spriteFont->draw(_spriteBatch, _buffer, glm::vec2(-150, -100), glm::vec2(1), 0.0f, color);
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
@@ -96,7 +96,7 @@ void GameOverScreen::checkInput() {
 
 		if (inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 			//presione click;
-			cout << "Para el otro anio sera" << endl;
+			cout << "Para el otro a" << char(164) << "o ser" << char(160) << endl;
 		}
 	}
 }
