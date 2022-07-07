@@ -43,10 +43,8 @@ void Button::draw(SpriteBacth& spriteBatch)
 
 bool Button::click(glm::vec2 position)
 {
-	if (position.x >= pos_x && position.x <= (pos_x + width)) {
-		std::cout << "Las x son iguales" << std::endl;
-		if (position.y >= pos_y && position.y <= (pos_y + height)) {
-			std::cout << "Las y son iguales" << std::endl;
+	if (position.x >= pos_x && position.x <= (pos_x + width)) {		
+		if (position.y >= pos_y && position.y <= (pos_y + height)) {			
 			return true;
 		}
 	}

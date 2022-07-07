@@ -2,6 +2,8 @@
 #include "SpriteBacth.h"
 #include <SDL/SDL.h>
 
+#define MAX_TEXTURE_RES 4096
+
 int closestPow2(int i) {
 	i--;
 	int pi = 1;
@@ -11,9 +13,6 @@ int closestPow2(int i) {
 	}
 	return pi;
 }
-
-#define MAX_TEXTURE_RES 4096
-
 
 SpriteFont::SpriteFont(const char* font, int size, char cs, char ce) {
 	init(font, size, cs, ce);

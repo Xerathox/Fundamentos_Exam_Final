@@ -133,7 +133,6 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
-    <ClCompile Include="Music.cpp" />
     <ClCompile Include="PapuEngine.cpp" />
     <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MenuScreen.h" />
-    <ClInclude Include="Music.h" />
     <ClInclude Include="PapuEngine.h" />
     <ClInclude Include="picoPNG.h" />
     <ClInclude Include="Player.h" />

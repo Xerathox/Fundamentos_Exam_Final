@@ -10,23 +10,17 @@
 
 using namespace std;
 
-GamePlayScreen::GamePlayScreen(Window* window) :
-	_window(window){
+GamePlayScreen::GamePlayScreen(Window* window) : _window(window) {
 	_screenIndex = SCREEN_INDEX_GAMEPLAY;
 	_currenLevel = 0;
 	_gamePlay = true;
 	_gameRetry = false;
 }
 
-GamePlayScreen::~GamePlayScreen(){
-
-}
+GamePlayScreen::~GamePlayScreen() { }
 
 void GamePlayScreen::build() {
 	_levels.push_back(new Level("Levels/level1.txt"));
-	_levels.push_back(new Level("Levels/level2.txt"));
-	_levels.push_back(new Level("Levels/level3.txt"));
-	_levels.push_back(new Level("Levels/level4.txt"));
 
 	//contador 
 	start = time(0);
@@ -41,23 +35,17 @@ void GamePlayScreen::build() {
 	std::uniform_int_distribution<int>randPosX(1, _levels[_currenLevel]->getWidth() - 2);
 	std::uniform_int_distribution<int>randPosY(1, _levels[_currenLevel]->getHeight() - 2);
 
-	cout << "Pos x" << _levels[_currenLevel]->getWidth() << endl;
-	cout << "Pos y" << _levels[_currenLevel]->getHeight() << endl;
-
 	//TODO creacion de humanos
-	for (int i = 0; i < 1; i++)
-	{
+	for (int i = 0; i < 1; i++)	{
 		_zombies.push_back(new Zombie());
 		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);		
 		_zombies.back()->init(1.3f, pos, (rand() % 3) + 1);
 	}
 }
-void GamePlayScreen::destroy() {
+void GamePlayScreen::destroy() { }
 
-}
 void GamePlayScreen::onExit() {
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
+	for (size_t i = 0; i < _zombies.size(); i++) {
 		delete _zombies[i];
 		_zombies[i] = _zombies.back();
 		_zombies.pop_back();
@@ -72,14 +60,13 @@ void GamePlayScreen::onEntry() {
 	_program.linkShader();
 	spriteFont = new SpriteFont("Fonts/1_Minecraft-Regular.otf", 40);
 	_background = new Background("Textures/Fondos/game.png");
-	_camera.init(_window->getScreenWidth(),
-		_window->getScreenHeight());
+	_camera.init(_window->getScreenWidth(),	_window->getScreenHeight());
 }
+
 void GamePlayScreen::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_program.use();
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _texture.id);
 
@@ -92,19 +79,15 @@ void GamePlayScreen::draw() {
 	glUniform1i(imageLocation, 0);
 
 	_spriteBatch.begin();
-
 	_background->draw(_spriteBatch, glm::vec4(0, 0, _levels[_currenLevel]->getWidth() * 64.0f, _levels[_currenLevel]->getHeight() * 65.0f));
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 	_spriteBatch.begin();
-
 	_player->draw(_spriteBatch, _player->spriteActual);
 	_levels[_currenLevel]->draw();
 
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
-		switch (_zombies[i]->_tipo_de_zombie) 
-		{
+	for (size_t i = 0; i < _zombies.size(); i++) {
+		switch (_zombies[i]->_tipo_de_zombie) {
 		case 1:
 			_zombies[i]->draw(_spriteBatch, "Textures/amarillo.png");
 			break;
@@ -118,7 +101,6 @@ void GamePlayScreen::draw() {
 			break;
 		}
 	}
-
 	int seconds_since_start = difftime(time(0), start);
 
 	//contador de tiempo
@@ -167,18 +149,15 @@ void GamePlayScreen::update() {
 	}
 
 	//logica de GAME OVER
-	if (puntaje <= 0) {		
+	if (puntaje <= 0)
 		_currentState = ScreenState::CHANGE_NEXT;
-	}
-
+	
 	//logica de niveles
 	if (_zombies.size() <= 0 && _currenLevel+1 < 4) {
 		_currenLevel++;
 		onExit();
 		build();		
-	}
-
-	
+	}	
 }
 
 void GamePlayScreen::updateAgents() {
@@ -186,35 +165,29 @@ void GamePlayScreen::updateAgents() {
 	_player->update(_levels[_currenLevel]->getLevelData(), _zombies, glm::vec2());
 
 	//movimientos zombies
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
+	for (size_t i = 0; i < _zombies.size(); i++) {
 		_zombies[i]->update(_levels[_currenLevel]->getLevelData(), _zombies, _player->getPosition());
 
 		//destruccion de zombies cuando interactuan con humanos
-		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH))
-		{
-			if (_inputManager.isKeyDown(SDLK_q))
-			{
+		if (_zombies[i]->collideWithPlayer(_player->getPosition().x, _player->getPosition().y, AGENT_WIDTH, AGENT_WIDTH)) {
+			if (_inputManager.isKeyDown(SDLK_q)) {
 				updatePuntaje(1,_zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
 			}
-			else if (_inputManager.isKeyDown(SDLK_w))
-			{
+			else if (_inputManager.isKeyDown(SDLK_w)) {
 				updatePuntaje(2, _zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
 			}
-			else if (_inputManager.isKeyDown(SDLK_e))
-			{
+			else if (_inputManager.isKeyDown(SDLK_e)) {
 				updatePuntaje(3, _zombies[i]->_tipo_de_zombie);
 				delete _zombies[i];
 				_zombies[i] = _zombies.back();
 				_zombies.pop_back();
 			}
-
 		}
 	}
 }
@@ -223,20 +196,18 @@ void GamePlayScreen::checkInput() {
 	SDL_Event event;
 	const float CAMERA_SPEED = 20.0f;
 	const float SCALE_SPEED = 0.1f;
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
 		case SDL_QUIT:
 			//_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
 			_inputManager.setMouseCoords(event.motion.x, event.motion.y);
 			break;
-		case  SDL_KEYUP:
+		case SDL_KEYUP:
 			_inputManager.releaseKey(event.key.keysym.sym);
 			break;
-		case  SDL_KEYDOWN:
+		case SDL_KEYDOWN:
 			_inputManager.pressKey(event.key.keysym.sym);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
@@ -251,23 +222,22 @@ void GamePlayScreen::checkInput() {
 		}
 		if (_inputManager.isKeyDown(SDLK_x)) {
 			_camera.setScale(_camera.getScale() - SCALE_SPEED);
-		}
-		
+		}		
 	}
 }
+
 int GamePlayScreen::getNextScreen() const {
 	return SCREEN_INDEX_LOST;
-};
+}
+
 int GamePlayScreen::getPreviousScreen() const {
 	return SCREEN_INDEX_NO_INDEX;
 }
 
 void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
-	switch (tecla)
-	{
+	switch (tecla) 	{
 	case 1:
-		switch (tipo)
-		{
+		switch (tipo) {
 		case 1:
 			cout << "Tecla q y zombie amarillo" << endl;
 			puntaje += 10;
@@ -285,8 +255,7 @@ void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
 		}
 		break;
 	case 2:
-		switch (tipo)
-		{
+		switch (tipo) {
 		case 1:
 			cout << "Tecla w y zombie amarillo" << endl;
 			puntaje += 15;
@@ -304,8 +273,7 @@ void GamePlayScreen::updatePuntaje(int tecla, int tipo) {
 		}
 		break;
 	case 3:
-		switch (tipo)
-		{
+		switch (tipo) {
 		case 1:
 			cout << "Tecla e y zombie amarillo" << endl;
 			puntaje /= 2;

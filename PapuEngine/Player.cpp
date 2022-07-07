@@ -13,10 +13,9 @@ void Player::init(float speed, glm::vec2 position, InputManager* inputManager, C
 	_camera = camera;
 	color.set(255, 255, 255, 255);
 	spriteActual = "Textures/player_alien.png";
-
 }
-void Player::update(const std::vector<std::string>& levelData, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
 
+void Player::update(const std::vector<std::string>& levelData, std::vector<Zombie*>& zombies, glm::vec2 player_position) {
 	collideWithZombies(zombies);
 
 	//movimiento
@@ -36,16 +35,11 @@ void Player::update(const std::vector<std::string>& levelData, std::vector<Zombi
 }
 
 void Player::collideWithZombies(std::vector<Zombie*>& zombies) {
-	for each (Zombie * zombie in zombies)
-	{
-		if (collideWithAgent(zombie))
-		{	
-			break;
-		}
+	for each (Zombie * zombie in zombies) {
+		if (collideWithAgent(zombie))		
+			break;		
 	}
 }
 
-Player::Player() {	
-}
-Player::~Player() {
-}
+Player::Player() { }
+Player::~Player() { }

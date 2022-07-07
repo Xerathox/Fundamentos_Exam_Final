@@ -20,9 +20,10 @@ private:
 	SpriteBacth _spriteBatch;
 	Background* background;	
 	InputManager inputManager;
-	Camera2D _camera;
-	void checkInput();
+	Camera2D _camera;	
 	SpriteFont* spriteFont;
+
+	void checkInput();
 
 public:
 	GameOverScreen(Window* window);

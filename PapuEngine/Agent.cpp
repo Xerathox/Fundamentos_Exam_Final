@@ -3,10 +3,7 @@
 #include "Level.h"
 #include <algorithm>
 
-Agent::Agent()
-{
-
-}
+Agent::Agent() { }
 
 void Agent::draw(SpriteBacth& spritebatch, std::string name_texture) {
 	int textureID = ResourceManager::getTexture(name_texture).id;
@@ -18,35 +15,29 @@ void Agent::draw(SpriteBacth& spritebatch, std::string name_texture) {
 bool Agent::collideWithLevel(const std::vector<std::string>& levelData) {
 	std::vector<glm::vec2> collideTilePosition;
 
-
 	checkTilePosition(levelData, collideTilePosition, _position.x, _position.y);
-
 	checkTilePosition(levelData, collideTilePosition, _position.x + AGENT_WIDTH, _position.y);
 	checkTilePosition(levelData, collideTilePosition, _position.x, _position.y + AGENT_WIDTH);
 	checkTilePosition(levelData, collideTilePosition, _position.x + AGENT_WIDTH, _position.y + AGENT_WIDTH);
 
-	if (collideTilePosition.size() == 0) return false;
+	if (collideTilePosition.size() == 0)
+		return false;
 
-	for (size_t i = 0; i < collideTilePosition.size(); i++)
-	{
+	for (size_t i = 0; i < collideTilePosition.size(); i++) {
 		collideWithTile(collideTilePosition[i]);
 	}
-
 	return true;
 }
 
 bool Agent::collideWithAgent(Agent* agent) {
-	glm::vec2 centerPosA = _position +
-		glm::vec2(AGENT_WIDTH / 2);
-	glm::vec2 centerPosB = agent->getPosition() +
-		glm::vec2(AGENT_WIDTH / 2);
+	glm::vec2 centerPosA = _position + glm::vec2(AGENT_WIDTH / 2);
+	glm::vec2 centerPosB = agent->getPosition() + glm::vec2(AGENT_WIDTH / 2);
 	glm::vec2 dist = centerPosA - centerPosB;
 	const float MIN_DISTANCE = AGENT_RADIUS * 2;
 	float distance = glm::length(dist);
 	float collisionDepth = MIN_DISTANCE - distance;
-	if (collisionDepth > 0) {
-		glm::vec2 collisionDepthVec =
-			glm::normalize(dist) * collisionDepth;
+	if (collisionDepth > 0) { 
+		glm::vec2 collisionDepthVec = glm::normalize(dist) * collisionDepth;
 		_position += collisionDepthVec / 2.0f;
 		agent->_position -= collisionDepthVec / 2.0f;
 		return true;
@@ -55,19 +46,16 @@ bool Agent::collideWithAgent(Agent* agent) {
 }
 
 void Agent::checkTilePosition(const std::vector<std::string>& levelData, std::vector<glm::vec2>& collideTilePosition, float x, float y) {
-	glm::vec2 cornesPos = glm::vec2(floor(x / (float)TILE_WIDTH),
-		floor(y / (float)TILE_WIDTH));
+	glm::vec2 cornesPos = glm::vec2(floor(x / (float)TILE_WIDTH), floor(y / (float)TILE_WIDTH));
 
-	if (cornesPos.x < 0 || cornesPos.x >= levelData[0].size() || cornesPos.y < 0 || cornesPos.y >= levelData.size()) {
+	if (cornesPos.x < 0 || cornesPos.x >= levelData[0].size() || cornesPos.y < 0 || cornesPos.y >= levelData.size())
 		return;
-	}
-	if (levelData[cornesPos.y][cornesPos.x] != '.') {
-		collideTilePosition.push_back(cornesPos * (float)TILE_WIDTH + glm::vec2((float)TILE_WIDTH / 2.0f));
-	}
+	
+	if (levelData[cornesPos.y][cornesPos.x] != '.')
+		collideTilePosition.push_back(cornesPos * (float)TILE_WIDTH + glm::vec2((float)TILE_WIDTH / 2.0f));	
 }
 
 void Agent::collideWithTile(glm::vec2 tilePos) {
-
 	const float TILE_RADIUS = (float)TILE_WIDTH / 2.0f;
 	const float MIN_DISTANCE = AGENT_RADIUS + TILE_RADIUS;
 
@@ -78,24 +66,19 @@ void Agent::collideWithTile(glm::vec2 tilePos) {
 
 	if (xdepth > 0 || ydepth > 0) {
 		if (std::max(xdepth, 0.0f) < std::max(ydepth, 0.0f)) {
-			if (distVec.x < 0) {
-				_position.x -= xdepth;
-			}
-			else {
-				_position.x += xdepth;
-			}
+			if (distVec.x < 0)
+				_position.x -= xdepth;			
+			else
+				_position.x += xdepth;			
 		}
 		else {
-			if (distVec.y < 0) {
+			if (distVec.y < 0)
 				_position.y -= ydepth;
-			}
-			else {
-				_position.y += ydepth;
-			}
+			
+			else
+				_position.y += ydepth;			
 		}
 	}
 }
 
-Agent::~Agent()
-{
-}
+Agent::~Agent() { }

@@ -147,9 +147,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Assets</Filter>
     </ClCompile>
-    <ClCompile Include="Music.cpp">
-      <Filter>Source Files\Engine\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverScreen.cpp">
       <Filter>Source Files\Plataformer</Filter>
     </ClCompile>
@@ -241,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="ScreenIndices.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Music.h">
-      <Filter>Header Files\Engine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="GameOverScreen.h">
       <Filter>Header Files\Plataformer</Filter>

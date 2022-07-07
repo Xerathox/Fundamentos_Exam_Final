@@ -1,14 +1,11 @@
 #include "Background.h"
 #include "ResourceManager.h"
 
-Background::Background(std::string _path) : path(_path)
-{
+Background::Background(std::string _path) : path(_path) {
 	_textureID = ResourceManager::getTexture(path).id;
 }
 
-Background::~Background()
-{
-}
+Background::~Background() { }
 
 void Background::draw(SpriteBacth& spriteBatch, glm::vec4 rec)
 {

@@ -18,7 +18,5 @@ private:
 	std::unique_ptr<GamePlayScreen> _gamePlayScreen = nullptr;
 	std::unique_ptr<MenuScreen>	_menuScreen = nullptr;
 	std::unique_ptr <GameOverScreen> _gameOverScreen = nullptr;
-
-
 };
 

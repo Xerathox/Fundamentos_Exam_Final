@@ -8,19 +8,14 @@ Level::Level(const std::string& fileName)
 {
 	std::ifstream file;
 	file.open(fileName);
-	if (file.fail()) {
-		fatalError("failed to open " + fileName);
-	}
+	if (file.fail())
+		fatalError("failed to open " + fileName);	
 	std::string tmp;
 
-	file >> tmp >> _numHumans;
-
 	std::getline(file, tmp);
-	while (std::getline(file, tmp)) {
-		_levelData.push_back(tmp);
-	}
+	while (std::getline(file, tmp))
+		_levelData.push_back(tmp);	
 	parseLevel();
-
 }
 
 void Level::draw() {
@@ -35,15 +30,12 @@ void Level::parseLevel() {
 	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 	Color color;
 	color.set(255, 255, 255, 255);
-	for (int y = 0; y < _levelData.size(); y++)
-	{
-		for (int x = 0; x < _levelData[y].size(); x++)
-		{
+	for (int y = 0; y < _levelData.size(); y++) {
+		for (int x = 0; x < _levelData[y].size(); x++) {
 			char tile = _levelData[y][x];
 			glm::vec4 destRect(x*TILE_WIDTH, y*TILE_WIDTH,
 							   TILE_WIDTH, TILE_WIDTH);
-			switch (tile)
-			{
+			switch (tile) {
 			case 'R':
 			case 'B':
 				_spriteBatch.draw(destRect, uvRect, 
@@ -78,7 +70,4 @@ void Level::parseLevel() {
 	_spriteBatch.end();
 }
 
-
-Level::~Level()
-{
-}
+Level::~Level() { }

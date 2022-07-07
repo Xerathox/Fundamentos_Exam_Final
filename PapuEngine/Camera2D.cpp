@@ -1,16 +1,7 @@
 #include "Camera2D.h"
 
 
-Camera2D::Camera2D(): 
-	_position(0,0), 
-	_cameraMatrix(1.0f),
-	_scale(1.0f),
-	_needsMatrixUpdate(true), 
-	_orthoMatrix(1.0f),
-	_screenWidth(500),_screenHeight(500)
-{
-
-}
+Camera2D::Camera2D(): _position(0,0), _cameraMatrix(1.0f), _scale(1.0f), _needsMatrixUpdate(true), _orthoMatrix(1.0f), _screenWidth(500),_screenHeight(500) { }
 
 glm::vec2 Camera2D::convertScreenToWorl(glm::vec2 screenScoords) {
 	screenScoords.y = _screenHeight - screenScoords.y;
@@ -26,15 +17,13 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 	const float MIN_DISTANCE_Y = dimension.y / 2.0f + scaleScreenDimension.y;
 
 	glm::vec2 centerPos = _position + dimension / 2.0f;
-	glm::vec2 centerCameraPos = _position + glm::vec2(scaleScreenDimension.x / 2.0f, 
-														scaleScreenDimension.y / 2.0f);
+	glm::vec2 centerCameraPos = _position + glm::vec2(scaleScreenDimension.x / 2.0f, scaleScreenDimension.y / 2.0f);
 	glm::vec2 distVec = centerPos - centerCameraPos;
 	float xdepth = MIN_DISTANCE_X - abs(distVec.x);
 	float ydepth = MIN_DISTANCE_Y - abs(distVec.y);
 
-	if (xdepth > 0 || ydepth > 0) {
-		return true;
-	}
+	if (xdepth > 0 || ydepth > 0)
+		return true;	
 }
 
 void Camera2D::init(int screenWidth, int screenHeight) {
@@ -44,13 +33,7 @@ void Camera2D::init(int screenWidth, int screenHeight) {
 }
 
 void Camera2D::update() {
-	if(_needsMatrixUpdate){
-		/*glm::vec3 translate(-_position.x, -_position.y, 0.0f);
-		_cameraMatrix = glm::translate(_orthoMatrix, translate);
-		glm::vec3 scale(_scale, _scale, 0.0f);
-		_cameraMatrix = glm::scale(_cameraMatrix,scale);
-		*/
-
+	if(_needsMatrixUpdate) {
 		glm::vec3 translate(-_position.x + _screenWidth / 2, -_position.y + _screenHeight/2, 0.0f);
 		_cameraMatrix = glm::translate(_orthoMatrix, translate);
 
@@ -61,6 +44,4 @@ void Camera2D::update() {
 	}
 }
 
-Camera2D::~Camera2D()
-{
-}
+Camera2D::~Camera2D() { }

@@ -1,13 +1,10 @@
 #include "App.h"
 #include "ScreenList.h"
 
-App::App()
-{
-}
+App::App() { }
 
-void App::onInit() {
+void App::onInit() { }
 
-}
 void App::addScreens() {
 	_gamePlayScreen = std::make_unique<GamePlayScreen>(&_window);
 	_menuScreen = std::make_unique<MenuScreen>(&_window);	
@@ -18,9 +15,6 @@ void App::addScreens() {
 	_screenList->setScreen(_menuScreen->getIndex());
 }
 
-void App::onExit() {
-}
+void App::onExit() { }
 
-App::~App()
-{
-}
+App::~App() { }

@@ -30,14 +30,16 @@ private:
 	vector<Level*> _levels;
 	vector<Zombie*> _zombies;
 	Player* _player;
-	int _currenLevel;	
 	SpriteFont* spriteFont;
 	Background* _background;
 	time_t start;	
+
+	int _currenLevel;
 	int count = 0;
 
 	bool _gamePlay;
 	bool _gameRetry;
+
 	void updateAgents();
 
 public:
@@ -52,8 +54,8 @@ public:
 	virtual void update()override;
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
+
 	void checkInput();
 	void updatePuntaje(int tecla, int tipo);
-
 };
 
